@@ -1108,7 +1108,35 @@ function toggleSelectedBox(){
     icon.innerHTML = "▶";
   }
 }
+/* ========================================================
+   SCRIPT ANTI-VIEW SOURCE, ANTI-KLIK KANAN & ANTI-INSPECT
+   ======================================================== */
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+}, false);
 
+document.addEventListener('keydown', function(e) {
+  // Blokir F12
+  if (e.key === "F12") {
+    e.preventDefault();
+    return false;
+  }
+  // Blokir Ctrl+Shift+I (Inspect), Ctrl+Shift+J (Console), Ctrl+Shift+C
+  if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C' || e.key === 'i' || e.key === 'j' || e.key === 'c')) {
+    e.preventDefault();
+    return false;
+  }
+  // Blokir Ctrl+U (View Source)
+  if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+    e.preventDefault();
+    return false;
+  }
+  // Blokir Ctrl+S (Save Page)
+  if (e.ctrlKey && (e.key === 'S' || e.key === 's')) {
+    e.preventDefault();
+    return false;
+  }
+}, false);
 /* =========================
    LISTENERS & INIT
 ========================= */
