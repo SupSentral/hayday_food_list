@@ -192,7 +192,7 @@
     }
 
     .selected-content.closed {
-      display: none;
+      display: none !important;
     }
 
     .copy-btn {
@@ -328,7 +328,7 @@
     .counter {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 4px;
       background: #fff3e0;
       padding: 4px;
       border-radius: 10px;
@@ -351,12 +351,25 @@
       color: #ffffff;
     }
 
-    .counter span {
+    .counter input {
+      width: 45px;
+      height: 30px;
+      border: none;
+      background: transparent;
+      text-align: center;
       font-size: 14px;
       font-weight: 700;
-      min-width: 20px;
-      text-align: center;
       color: #4a3728;
+      outline: none;
+    }
+
+    .counter input::-webkit-outer-spin-button,
+    .counter input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .counter input[type=number] {
+      -moz-appearance: textfield;
     }
 
     @media (max-width: 768px) {
@@ -426,11 +439,11 @@
     <div class="selected-top">
       <div class="selected-title" onclick="toggleSelectedBox()">
         <h2>📋 List Pilihan</h2>
-        <span id="toggleIcon">▼</span>
+        <span id="toggleIcon">▶</span>
       </div>
       <button class="copy-btn" onclick="copySelected()">📄 Salin List</button>
     </div>
-    <div class="selected-content" id="selectedContent">
+    <div class="selected-content closed" id="selectedContent">
       <div class="selected-list" id="selectedList">
         <div class="empty-selected">Belum ada item dipilih</div>
       </div>
@@ -884,11 +897,11 @@ const sortFilter = document.getElementById("sortFilter");
 const selectedCount = document.getElementById("selectedCount");
 
 let selectedFoods = {};
-let selectedOpen = true;
+let selectedOpen = false;
 let searchTimeout = null;
 
 /* =========================================================
-   RENDER FOODS GRID (DocumentFragment)
+   RENDER FOODS GRID
    ========================================================= */
 function renderFoods(data){
   foodsGrid.innerHTML = "";
@@ -922,7 +935,7 @@ function renderFoods(data){
         <div class="level">Level <span>${food.lvl}</span></div>
         <div class="counter">
           <button onclick="changeQty('${food.en.replaceAll("'", "\\'")}', -1)">-</button>
-          <span id="qty-${safeId}">${qty}</span>
+          <input type="number" id="qty-${safeId}" value="${qty}" min="0" oninput="updateInputQty('${food.en.replaceAll("'", "\\'")}', this.value)">
           <button onclick="changeQty('${food.en.replaceAll("'", "\\'")}', 10)">+</button>
         </div>
       </div>
@@ -933,9 +946,6 @@ function renderFoods(data){
   foodsGrid.appendChild(fragment);
 }
 
-/* =========================
-   CHANGE QTY
-========================= */
 function changeQty(name, amount){
   if(!selectedFoods[name]){
     selectedFoods[name] = 0;
@@ -950,17 +960,27 @@ function changeQty(name, amount){
   }
 
   const safeId = name.replaceAll(' ', '_').replaceAll("'", "");
-  const qtySpan = document.getElementById(`qty-${safeId}`);
-  if(qtySpan) {
-    qtySpan.textContent = currentQty;
+  const qtyInput = document.getElementById(`qty-${safeId}`);
+  if(qtyInput) {
+    qtyInput.value = currentQty;
   }
 
   renderSelected();
 }
 
-/* =========================
-   RENDER SELECTED LIST
-========================= */
+function updateInputQty(name, value){
+  let val = parseInt(value);
+  
+  if(isNaN(val) || val <= 0){
+    delete selectedFoods[name];
+    val = 0;
+  } else {
+    selectedFoods[name] = val;
+  }
+
+  renderSelected();
+}
+
 function renderSelected(){
   selectedList.innerHTML = "";
   const entries = Object.entries(selectedFoods);
@@ -989,9 +1009,6 @@ function renderSelected(){
   selectedCount.textContent = total;
 }
 
-/* ===============================================
-   FILTER & SORT
-   =============================================== */
 function filterFoods(){
   let filtered = [...foodsData];
 
@@ -1021,9 +1038,6 @@ function filterFoods(){
   renderFoods(filtered);
 }
 
-/* =========================================================
-   DEBOUNCE INPUT
-   ========================================================= */
 function debounceSearch() {
   clearTimeout(searchTimeout);
   searchTimeout = setTimeout(() => {
@@ -1031,9 +1045,6 @@ function debounceSearch() {
   }, 150);
 }
 
-/* =========================
-   UTILS / COPY / RESET
-========================= */
 function copySelected(){
   const entries = Object.entries(selectedFoods);
 
@@ -1065,7 +1076,6 @@ function populateMachines(){
   const machines = [...new Set(foodsData.map(item => item.fn))];
   machines.sort();
 
-  // Reset isi dropdown filter dan sisakan default "Semua Mesin"
   machineFilter.innerHTML = `<option value="all">Semua Mesin</option>`;
 
   const fragment = document.createDocumentFragment();
