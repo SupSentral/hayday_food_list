@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hay Day Foods Collection</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===================================================
+       LIGHT, MODERN & ELEGANT CSS (Optimized Performance)
+       =================================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #fcf8f2;
+      color: #4a3728;
+      padding: 25px 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header h1 {
+      font-size: 38px;
+      font-weight: 700;
+      color: #e06c00;
+    }
+
+    .header p {
+      margin-top: 5px;
+      font-size: 15px;
+      color: #8a7360;
+    }
+
+    /* Facebook Profile Badge */
+    .fb-profile {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 6px 14px;
+      background-color: #ffffff;
+      border: 1px solid #ebdccb;
+      border-radius: 20px;
+      text-decoration: none;
+      color: #1877f2;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .fb-profile:hover {
+      background-color: #f0f7ff;
+      border-color: #1877f2;
+    }
+
+    .fb-profile svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Controls Panel */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 12px 18px;
+      border: 1.5px solid #ebdccb;
+      border-radius: 12px;
+      background: #ffffff;
+      color: #4a3728;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .search-box input:focus {
+      border-color: #e06c00;
+    }
+
+    .filter-select {
+      padding: 0 16px;
+      height: 48px;
+      border: 1.5px solid #ebdccb;
+      border-radius: 12px;
+      background: #ffffff;
+      color: #4a3728;
+      font-size: 15px;
+      font-weight: 500;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .filter-select:focus {
+      border-color: #e06c00;
+    }
+
+    /* Stats Grid */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat-card {
+      background: #ffffff;
+      padding: 16px;
+      border-radius: 16px;
+      text-align: center;
+      border: 1px solid #ebdccb;
+    }
+
+    .stat-card h2 {
+      font-size: 28px;
+      color: #e06c00;
+      font-weight: 700;
+    }
+
+    .stat-card p {
+      font-size: 13px;
+      color: #8a7360;
+      margin-top: 2px;
+    }
+
+    /* Selected Box (📋 List Pilihan) */
+    .selected-box {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 30px;
+      border: 1.5px solid #ebdccb;
+    }
+
+    .selected-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .selected-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .selected-title h2 {
+      color: #e06c00;
+      font-size: 22px;
+    }
+
+    #toggleIcon {
+      font-size: 14px;
+    }
+
+    .selected-content {
+      overflow: hidden;
+      max-height: 1000px;
+    }
+
+    .selected-content.closed {
+      display: none;
+    }
+
+    .copy-btn {
+      background: #e06c00;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      background: #c45f00;
+    }
+
+    .selected-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+      padding-top: 10px;
+    }
+
+    .selected-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fdfaf6;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid #ebdccb;
+      font-size: 14px;
+    }
+
+    .selected-item span {
+      color: #4a3728;
+    }
+
+    .selected-item strong {
+      color: #e06c00;
+    }
+
+    .empty-selected, .empty {
+      color: #8a7360;
+      font-style: italic;
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 15px 0;
+    }
+
+    /* Foods Grid & Card */
+    .foods-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .food-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid #ebdccb;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .food-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .emoji {
+      width: 54px;
+      height: 54px;
+      background: #fdfaf6;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #f2e6d9;
+    }
+
+    .emoji img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
+
+    .food-info {
+      flex: 1;
+    }
+
+    .food-info h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #4a3728;
+      line-height: 1.2;
+    }
+
+    .machine {
+      font-size: 12px;
+      color: #e06c00;
+      font-weight: 600;
+      background: #fff3e0;
+      padding: 2px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    .food-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #fcf8f2;
+      padding-top: 10px;
+    }
+
+    .level {
+      font-size: 13px;
+      color: #8a7360;
+    }
+
+    .level span {
+      color: #4a3728;
+      font-weight: 700;
+    }
+
+    .counter {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff3e0;
+      padding: 4px;
+      border-radius: 10px;
+    }
+
+    .counter button {
+      width: 30px;
+      height: 30px;
+      border: none;
+      background: #ffffff;
+      color: #e06c00;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .counter button:hover {
+      background: #e06c00;
+      color: #ffffff;
+    }
+
+    .counter span {
+      font-size: 14px;
+      font-weight: 700;
+      min-width: 20px;
+      text-align: center;
+      color: #4a3728;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 { font-size: 30px; }
+      .controls { flex-direction: column; }
+      .filter-select { width: 100%; height: 45px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>Hay Day Foods Collection</h1>
+    <p>Kumpulan semua makanan, minuman, dan item Hay Day</p>
+    
+    <a href="https://www.facebook.com/cahyo.hadi.957584/" target="_blank" rel="noopener noreferrer" class="fb-profile">
+      <svg viewBox="0 0 24 24">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+      Cahyo Hadi Saputro
+    </a>
+  </div>
+
+  <div class="controls">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Cari makanan...">
+    </div>
+
+    <select id="machineFilter" class="filter-select">
+      <option value="all">Semua Mesin</option>
+    </select>
+
+    <select id="sortFilter" class="filter-select">
+      <option value="default">Urutkan</option>
+      <option value="low">Level Terendah</option>
+      <option value="high">Level Tertinggi</option>
+      <option value="az">A - Z</option>
+    </select>
+
+    <button type="button" class="filter-select" id="resetBtn" onclick="resetAll()" style="background: #ff5e00; color: white; font-weight: 600; border: none;">
+      🔄 Reset Semua
+    </button>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <h2 id="totalFoods">0</h2>
+      <p>Total Item</p>
+    </div>
+    <div class="stat-card">
+      <h2 id="totalMachines">0</h2>
+      <p>Total Mesin</p>
+    </div>
+    <div class="stat-card">
+      <h2 id="highestLevel">0</h2>
+      <p>Level Tertinggi</p>
+    </div>
+    <div class="stat-card">
+      <h2 id="selectedCount">0</h2>
+      <p>Total Dipilih</p>
+    </div>
+  </div>
+
+  <div class="selected-box">
+    <div class="selected-top">
+      <div class="selected-title" onclick="toggleSelectedBox()">
+        <h2>📋 List Pilihan</h2>
+        <span id="toggleIcon">▼</span>
+      </div>
+      <button class="copy-btn" onclick="copySelected()">📄 Salin List</button>
+    </div>
+    <div class="selected-content" id="selectedContent">
+      <div class="selected-list" id="selectedList">
+        <div class="empty-selected">Belum ada item dipilih</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foods-grid" id="foodsGrid"></div>
+
+</div>
+
+<script>
+const foodsData = [
+  // Bakery
+  { en: "Bread",                   lvl: 2,   fn: "Bakery" },
+  { en: "Corn Bread",              lvl: 7,   fn: "Bakery" },
+  { en: "Cookie",                  lvl: 10,  fn: "Bakery" },
+  { en: "Raspberry Muffin",        lvl: 19,  fn: "Bakery" },
+  { en: "Blackberry Muffin",       lvl: 26,  fn: "Bakery" },
+  { en: "Blueberry Muffin",        lvl: 33,  fn: "Bakery" },
+  { en: "Pizza",                   lvl: 33,  fn: "Bakery" },
+  { en: "Spicy Pizza",             lvl: 37,  fn: "Bakery" },
+  { en: "Potato Bread",            lvl: 39,  fn: "Bakery" },
+  { en: "Frutti di Mare Pizza",    lvl: 45,  fn: "Bakery" },
+  { en: "Gingerbread Cookie",      lvl: 86,  fn: "Bakery" },
+  { en: "Banana Bread",            lvl: 91,  fn: "Bakery" },
+  { en: "Macaroon",                lvl: 101, fn: "Bakery" },
+  { en: "Pineapple Coconut Bars",  lvl: 120, fn: "Bakery" },
+
+  // Bath Kiosk
+  { en: "Honey Soap",              lvl: 84,  fn: "Bath Kiosk" },
+  { en: "Lemon Lotion",            lvl: 84,  fn: "Bath Kiosk" },
+  { en: "Exfoliating Soap",        lvl: 93,  fn: "Bath Kiosk" },
+  { en: "Honey Face Mask",         lvl: 99,  fn: "Bath Kiosk" },
+  { en: "Rich Soap",               lvl: 121, fn: "Bath Kiosk" },
+
+  // BBQ Grill
+  { en: "Pancakes",                lvl: 9,   fn: "BBQ Grill" },
+  { en: "Bacon and Eggs",          lvl: 11,  fn: "BBQ Grill" },
+  { en: "Hamburger",               lvl: 18,  fn: "BBQ Grill" },
+  { en: "Grilled Lamb Skewer",     lvl: 25,  fn: "BBQ Grill" },
+  { en: "Fishburger",              lvl: 27,  fn: "BBQ Grill" },
+  { en: "Roasted Tomatoes",        lvl: 30,  fn: "BBQ Grill" },
+  { en: "Baked Potato",            lvl: 35,  fn: "BBQ Grill" },
+  { en: "Fish and Chips",          lvl: 41,  fn: "BBQ Grill" },
+  { en: "Lobster Skewer",          lvl: 48,  fn: "BBQ Grill" },
+  { en: "Garlic Bread",            lvl: 60,  fn: "BBQ Grill" },
+  { en: "Grilled Asparagus",       lvl: 67,  fn: "BBQ Grill" },
+  { en: "Grilled Onion",           lvl: 68,  fn: "BBQ Grill" },
+  { en: "Winter Veggies",          lvl: 72,  fn: "BBQ Grill" },
+  { en: "Stuffed Peppers",         lvl: 80,  fn: "BBQ Grill" },
+  { en: "Grilled Eggplant",        lvl: 90,  fn: "BBQ Grill" },
+  { en: "Banana Pancakes",         lvl: 94,  fn: "BBQ Grill" },
+  { en: "Fish Skewer",             lvl: 96,  fn: "BBQ Grill" },
+
+  // Cake Oven
+  { en: "Carrot Cake",             lvl: 21,  fn: "Cake Oven" },
+  { en: "Birthday Cake",           lvl: 23,  fn: "Cake Oven" },
+  { en: "Berry Cake",              lvl: 23,  fn: "Cake Oven" },
+  { en: "Cheese Cake",             lvl: 24,  fn: "Cake Oven" },
+  { en: "Blueberry Cheesecake",    lvl: 31,  fn: "Cake Oven" },
+  { en: "Strawberry Cake",         lvl: 35,  fn: "Cake Oven" },
+  { en: "Chocolate Cake",          lvl: 36,  fn: "Cake Oven" },
+  { en: "Potato Feta Cake",        lvl: 38,  fn: "Cake Oven" },
+  { en: "Honey Apple Cake",        lvl: 42,  fn: "Cake Oven" },
+  { en: "Fancy Cake",              lvl: 54,  fn: "Cake Oven" },
+  { en: "Pineapple Cake",          lvl: 65,  fn: "Cake Oven" },
+  { en: "Lemon Cake",              lvl: 68,  fn: "Cake Oven" },
+  { en: "Fruit Cake",              lvl: 89,  fn: "Cake Oven" },
+  { en: "Chocolate Roll",          lvl: 95,  fn: "Cake Oven" },
+  { en: "Pomegranate Cake",        lvl: 108, fn: "Cake Oven" },
+
+  // Candle Maker
+  { en: "Strawberry Candle",       lvl: 48,  fn: "Candle Maker" },
+  { en: "Raspberry Candle",        lvl: 52,  fn: "Candle Maker" },
+  { en: "Lemon Candle",            lvl: 72,  fn: "Candle Maker" },
+  { en: "Colorful Candle",         lvl: 84,  fn: "Candle Maker" },
+  { en: "Floral Candle",           lvl: 95,  fn: "Candle Maker" },
+
+  // Candy Machine
+  { en: "Caramel Apple",           lvl: 51,  fn: "Candy Machine" },
+  { en: "Toffee",                  lvl: 52,  fn: "Candy Machine" },
+  { en: "Chocolate",               lvl: 54,  fn: "Candy Machine" },
+  { en: "Lollipop",                lvl: 57,  fn: "Candy Machine" },
+  { en: "Jelly Beans",             lvl: 60,  fn: "Candy Machine" },
+  { en: "Honey Peanuts",           lvl: 63,  fn: "Candy Machine" },
+  { en: "Cotton Candy",            lvl: 75,  fn: "Candy Machine" },
+  { en: "Sesame Brittle",          lvl: 78,  fn: "Candy Machine" },
+
+  // Coffee Kiosk
+  { en: "Espresso",                lvl: 42,  fn: "Coffee Kiosk" },
+  { en: "Latte",                   lvl: 43,  fn: "Coffee Kiosk" },
+  { en: "Mocha",                   lvl: 45,  fn: "Coffee Kiosk" },
+  { en: "Raspberry Mocha",         lvl: 46,  fn: "Coffee Kiosk" },
+  { en: "Hot Chocolate",           lvl: 47,  fn: "Coffee Kiosk" },
+  { en: "Caramel Latte",           lvl: 62,  fn: "Coffee Kiosk" },
+  { en: "Iced Banana Latte",       lvl: 88,  fn: "Coffee Kiosk" },
+
+  // Cupcake Maker
+  { en: "Plain Cupcake",           lvl: 109, fn: "Cupcake Maker" },
+  { en: "Guava Cupcake",           lvl: 109, fn: "Cupcake Maker" },
+  { en: "Tropical Cupcake",        lvl: 112, fn: "Cupcake Maker" },
+  { en: "Cookie Cupcake",          lvl: 114, fn: "Cupcake Maker" },
+
+  // Dairy
+  { en: "Cream",                   lvl: 6,   fn: "Dairy" },
+  { en: "Butter",                  lvl: 9,   fn: "Dairy" },
+  { en: "Cheese",                  lvl: 12,  fn: "Dairy" },
+  { en: "Goat Cheese",             lvl: 33,  fn: "Dairy" },
+
+  // Deep Fryer
+  { en: "Bacon Fries",             lvl: 87,  fn: "Deep Fryer" },
+  { en: "Hand Pies",               lvl: 91,  fn: "Deep Fryer" },
+  { en: "Chili Poppers",           lvl: 98,  fn: "Deep Fryer" },
+  { en: "Falafel",                 lvl: 98,  fn: "Deep Fryer" },
+  { en: "Fried Candy Bar",         lvl: 100, fn: "Deep Fryer" },
+  { en: "Samosa",                  lvl: 103, fn: "Deep Fryer" },
+
+  // Donut Maker
+  { en: "Plain Donut",             lvl: 76,  fn: "Donut Maker" },
+  { en: "Sprinkled Donut",         lvl: 79,  fn: "Donut Maker" },
+  { en: "Crunchy Donut",           lvl: 82,  fn: "Donut Maker" },
+  { en: "Cream Donut",             lvl: 86,  fn: "Donut Maker" },
+  { en: "Bacon Donut",             lvl: 88,  fn: "Donut Maker" },
+  { en: "Filled Donut",            lvl: 93,  fn: "Donut Maker" },
+
+  // Essential Oils Lab
+  { en: "Lemon Essential Oil",     lvl: 68,  fn: "Essential Oils Lab" },
+  { en: "Chamomile Essential Oil", lvl: 74,  fn: "Essential Oils Lab" },
+  { en: "Ginger Essential Oil",    lvl: 80,  fn: "Essential Oils Lab" },
+  { en: "Mint Essential Oil",      lvl: 85,  fn: "Essential Oils Lab" },
+
+  // Fish Boat
+  { en: "Fish Meat",               lvl: 27,  fn: "Fish Boat" },
+  { en: "Lobster Meat",            lvl: 44,  fn: "Fish Boat" },
+  { en: "Duck Down",               lvl: 50,  fn: "Fish Boat" },
+
+  // Flowershop
+  { en: "Rustic Bouquet",          lvl: 49,  fn: "Flowershop" },
+  { en: "Bright Bouquet",          lvl: 65,  fn: "Flowershop" },
+  { en: "Gracious Bouquet",        lvl: 73,  fn: "Flowershop" },
+  { en: "Candy Bouquet",           lvl: 90,  fn: "Flowershop" },
+  { en: "Birthday Bouquet",        lvl: 92,  fn: "Flowershop" },
+  { en: "Soft Bouquet",            lvl: 93,  fn: "Flowershop" },
+  { en: "Veggie Bouquet",          lvl: 106, fn: "Flowershop" },
+
+  // Fondue Pot
+  { en: "Chocolate Fondue",        lvl: 81,  fn: "Fondue Pot" },
+  { en: "Bacon Fondue",            lvl: 86,  fn: "Fondue Pot" },
+  { en: "Cheese Fondue",           lvl: 91,  fn: "Fondue Pot" },
+  { en: "Tropical Fondue",         lvl: 100, fn: "Fondue Pot" },
+
+  // Fudge Shop
+  { en: "Rich Fudge",              lvl: 99,  fn: "Fudge Shop" },
+  { en: "Mint Fudge",              lvl: 102, fn: "Fudge Shop" },
+  { en: "Chili Fudge",             lvl: 104, fn: "Fudge Shop" },
+  { en: "Lemon Fudge",             lvl: 108, fn: "Fudge Shop" },
+  { en: "Peanut Fudge",            lvl: 111, fn: "Fudge Shop" },
+
+  // Hat Maker
+  { en: "Cloche Hat",              lvl: 70,  fn: "Hat Maker" },
+  { en: "Top Hat",                 lvl: 72,  fn: "Hat Maker" },
+  { en: "Sun Hat",                 lvl: 74,  fn: "Hat Maker" },
+  { en: "Flower Crown",            lvl: 86,  fn: "Hat Maker" },
+
+  // Honey Extractor
+  { en: "Honey",                   lvl: 39,  fn: "Honey Extractor" },
+  { en: "Beeswax",                 lvl: 48,  fn: "Honey Extractor" },
+
+  // Hot Dog Stand
+  { en: "Hot Dog",                 lvl: 75,  fn: "Hot Dog Stand" },
+  { en: "Tofu Dog",                lvl: 76,  fn: "Hot Dog Stand" },
+  { en: "Corn Dog",                lvl: 78,  fn: "Hot Dog Stand" },
+  { en: "Onion Dog",               lvl: 80,  fn: "Hot Dog Stand" },
+
+  // Ice Cream Maker
+  { en: "Vanilla Ice Cream",       lvl: 29,  fn: "Ice Cream Maker" },
+  { en: "Cherry Popsicle",         lvl: 33,  fn: "Ice Cream Maker" },
+  { en: "Strawberry Ice Cream",    lvl: 34,  fn: "Ice Cream Maker" },
+  { en: "Chocolate Ice Cream",     lvl: 39,  fn: "Ice Cream Maker" },
+  { en: "Sesame Ice Cream",        lvl: 50,  fn: "Ice Cream Maker" },
+  { en: "Peanut Butter Milkshake", lvl: 68,  fn: "Ice Cream Maker" },
+  { en: "Affogato",                lvl: 76,  fn: "Ice Cream Maker" },
+  { en: "Orange Sorbet",           lvl: 78,  fn: "Ice Cream Maker" },
+  { en: "Peach Ice Cream",         lvl: 83,  fn: "Ice Cream Maker" },
+  { en: "Mint Ice Cream",          lvl: 85,  fn: "Ice Cream Maker" },
+  { en: "Banana Split",            lvl: 96,  fn: "Ice Cream Maker" },
+  { en: "Coconut Ice Cream",       lvl: 102, fn: "Ice Cream Maker" },
+  { en: "Fruit Sorbet",            lvl: 106, fn: "Ice Cream Maker" },
+
+  // Jam Maker
+  { en: "Apple Jam",               lvl: 35,  fn: "Jam Maker" },
+  { en: "Raspberry Jam",           lvl: 36,  fn: "Jam Maker" },
+  { en: "Blackberry Jam",          lvl: 37,  fn: "Jam Maker" },
+  { en: "Cherry Jam",              lvl: 38,  fn: "Jam Maker" },
+  { en: "Strawberry Jam",          lvl: 50,  fn: "Jam Maker" },
+  { en: "Blueberry Chutney",       lvl: 70,  fn: "Jam Maker" },
+  { en: "Marmalade",               lvl: 74,  fn: "Jam Maker" },
+  { en: "Peach Jam",               lvl: 79,  fn: "Jam Maker" },
+  { en: "Grape Jam",               lvl: 85,  fn: "Jam Maker" },
+  { en: "Passion Fruit Jam",       lvl: 96,  fn: "Jam Maker" },
+  { en: "Plum Jam",                lvl: 94,  fn: "Jam Maker" },
+
+  // Jeweler
+  { en: "Bracelet",                lvl: 38,  fn: "Jeweler" },
+  { en: "Necklace",                lvl: 39,  fn: "Jeweler" },
+  { en: "Diamond Ring",            lvl: 40,  fn: "Jeweler" },
+  { en: "Iron Bracelet",           lvl: 41,  fn: "Jeweler" },
+  { en: "Flower Pendant",          lvl: 98,  fn: "Jeweler" },
+
+  // Juice Press
+  { en: "Carrot Juice",            lvl: 26,  fn: "Juice Press" },
+  { en: "Apple Juice",             lvl: 28,  fn: "Juice Press" },
+  { en: "Cherry Juice",            lvl: 30,  fn: "Juice Press" },
+  { en: "Tomato Juice",            lvl: 31,  fn: "Juice Press" },
+  { en: "Berry Juice",             lvl: 31,  fn: "Juice Press" },
+  { en: "Pineapple Juice",         lvl: 52,  fn: "Juice Press" },
+  { en: "Orange Juice",            lvl: 71,  fn: "Juice Press" },
+  { en: "Grape Juice",             lvl: 84,  fn: "Juice Press" },
+  { en: "Passion Fruit Juice",     lvl: 88,  fn: "Juice Press" },
+  { en: "Watermelon Juice",        lvl: 92,  fn: "Juice Press" },
+  { en: "Mango Juice",             lvl: 97,  fn: "Juice Press" },
+  { en: "Guava Juice",             lvl: 104, fn: "Juice Press" },
+
+  // Loom
+  { en: "Sweater",                 lvl: 17,  fn: "Loom" },
+  { en: "Cotton Fabrics",          lvl: 18,  fn: "Loom" },
+  { en: "Blue Woolly Hat",         lvl: 19,  fn: "Loom" },
+  { en: "Blue Sweater",            lvl: 20,  fn: "Loom" },
+  { en: "Red Scarf",               lvl: 48,  fn: "Loom" },
+  { en: "Flower Shawl",            lvl: 71,  fn: "Loom" },
+
+  // Milkshake Bar
+  { en: "Vanilla Milkshake",       lvl: 124, fn: "Milkshake Bar" },
+  { en: "Mocha Milkshake",         lvl: 125, fn: "Milkshake Bar" },
+  { en: "Fruity Milkshake",        lvl: 126, fn: "Milkshake Bar" },
+
+  // Omelet Station
+  { en: "Colorful Omelet",         lvl: 77,  fn: "Omelet Station" },
+  { en: "Spring Omelet",           lvl: 77,  fn: "Omelet Station" },
+  { en: "Cheese Omelet",           lvl: 79,  fn: "Omelet Station" },
+  { en: "Rice Omelet",             lvl: 83,  fn: "Omelet Station" },
+  { en: "Potato Omelet",           lvl: 87,  fn: "Omelet Station" },
+
+  // Pasta Kitchen
+  { en: "Gnocchi",                 lvl: 72,  fn: "Pasta Kitchen" },
+  { en: "Veggie Lasagna",          lvl: 74,  fn: "Pasta Kitchen" },
+  { en: "Lobster Pasta",           lvl: 79,  fn: "Pasta Kitchen" },
+  { en: "Broccoli Pasta",          lvl: 83,  fn: "Pasta Kitchen" },
+  { en: "Pasta Carbonara",         lvl: 83,  fn: "Pasta Kitchen" },
+  { en: "Spicy Pasta",             lvl: 87,  fn: "Pasta Kitchen" },
+  { en: "Mushroom Pasta",          lvl: 101, fn: "Pasta Kitchen" },
+
+  // Pasta Maker
+  { en: "Fresh Pasta",             lvl: 67,  fn: "Pasta Maker" },
+  { en: "Rice Noodles",            lvl: 73,  fn: "Pasta Maker" },
+
+  // Perfumerie
+  { en: "Fresh Diffuser",          lvl: 110, fn: "Perfumerie" },
+  { en: "Zesty Perfume",           lvl: 113, fn: "Perfumerie" },
+  { en: "Calming Diffuser",        lvl: 116, fn: "Perfumerie" },
+
+  // Pie Oven
+  { en: "Carrot Pie",              lvl: 14,  fn: "Pie Oven" },
+  { en: "Pumpkin Pie",             lvl: 15,  fn: "Pie Oven" },
+  { en: "Bacon Pie",               lvl: 18,  fn: "Pie Oven" },
+  { en: "Apple Pie",               lvl: 28,  fn: "Pie Oven" },
+  { en: "Fish Pie",                lvl: 28,  fn: "Pie Oven" },
+  { en: "Feta Pie",                lvl: 34,  fn: "Pie Oven" },
+  { en: "Casserole",               lvl: 36,  fn: "Pie Oven" },
+  { en: "Shepherds Pie",           lvl: 39,  fn: "Pie Oven" },
+  { en: "Asparagus Quiche",        lvl: 49,  fn: "Pie Oven" },
+  { en: "Chocolate Pie",           lvl: 65,  fn: "Pie Oven" },
+  { en: "Lemon Pie",               lvl: 67,  fn: "Pie Oven" },
+  { en: "Peach Tart",              lvl: 76,  fn: "Pie Oven" },
+  { en: "Passion Fruit Pie",       lvl: 92,  fn: "Pie Oven" },
+  { en: "Mushroom Pot Pie",        lvl: 97,  fn: "Pie Oven" },
+  { en: "Eggplant Parmesan",       lvl: 99,  fn: "Pie Oven" },
+
+  // Popcorn Pot
+  { en: "Popcorn",                 lvl: 8,   fn: "Popcorn Pot" },
+  { en: "Butter Popcorn",          lvl: 16,  fn: "Popcorn Pot" },
+  { en: "Chili Popcorn",           lvl: 25,  fn: "Popcorn Pot" },
+  { en: "Honey Popcorn",           lvl: 40,  fn: "Popcorn Pot" },
+  { en: "Chocolate Popcorn",       lvl: 44,  fn: "Popcorn Pot" },
+  { en: "Snack Mix",               lvl: 64,  fn: "Popcorn Pot" },
+
+  // Porridge Bar
+  { en: "Apple Porridge",          lvl: 119, fn: "Porridge Bar" },
+  { en: "Sweet Porridge",          lvl: 120, fn: "Porridge Bar" },
+  { en: "Fresh Porridge",          lvl: 122, fn: "Porridge Bar" },
+
+  // Pottery Studio
+  { en: "Tea Pot",                 lvl: 94,  fn: "Pottery Studio" },
+  { en: "Potted Plant",            lvl: 96,  fn: "Pottery Studio" },
+  { en: "Clay Mug",                lvl: 99,  fn: "Pottery Studio" },
+
+  // Preservation Station
+  { en: "Pickles",                 lvl: 91,  fn: "Preservation Station" },
+  { en: "Canned Fish",             lvl: 95,  fn: "Preservation Station" },
+  { en: "Kimchi",                  lvl: 98,  fn: "Preservation Station" },
+  { en: "Dried Fruit",             lvl: 102, fn: "Preservation Station" },
+  { en: "Guava Compote",           lvl: 104, fn: "Preservation Station" },
+
+  // Salad Bar
+  { en: "Greek Salad",             lvl: 58,  fn: "Salad Bar" },
+  { en: "Bean Salad",              lvl: 58,  fn: "Salad Bar" },
+  { en: "Bacon Salad",             lvl: 62,  fn: "Salad Bar" },
+  { en: "Seafood Salad",           lvl: 64,  fn: "Salad Bar" },
+  { en: "Pasta Salad",             lvl: 67,  fn: "Salad Bar" },
+  { en: "Veggie Platter",          lvl: 74,  fn: "Salad Bar" },
+  { en: "Coleslaw",                lvl: 75,  fn: "Salad Bar" },
+  { en: "Beetroot Salad",          lvl: 76,  fn: "Salad Bar" },
+  { en: "Summer Rolls",            lvl: 78,  fn: "Salad Bar" },
+  { en: "Fruit Salad",             lvl: 82,  fn: "Salad Bar" },
+  { en: "Summer Salad",            lvl: 84,  fn: "Salad Bar" },
+  { en: "Mushroom Salad",          lvl: 89,  fn: "Salad Bar" },
+  { en: "Orange Salad",            lvl: 117, fn: "Salad Bar" },
+
+  // Sandwich Bar
+  { en: "Veggie Bagel",            lvl: 61,  fn: "Sandwich Bar" },
+  { en: "Bacon Toast",             lvl: 65,  fn: "Sandwich Bar" },
+  { en: "Egg Sandwich",            lvl: 66,  fn: "Sandwich Bar" },
+  { en: "Honey Toast",             lvl: 69,  fn: "Sandwich Bar" },
+  { en: "Peanut Butter Sandwich",  lvl: 71,  fn: "Sandwich Bar" },
+  { en: "Cucumber Sandwich",       lvl: 79,  fn: "Sandwich Bar" },
+  { en: "Onion Melt",              lvl: 84,  fn: "Sandwich Bar" },
+  { en: "Goat Cheese Toast",       lvl: 92,  fn: "Sandwich Bar" },
+  { en: "Hummus Wrap",             lvl: 109, fn: "Sandwich Bar" },
+
+  // Sauce Maker
+  { en: "Soy Sauce",               lvl: 54,  fn: "Sauce Maker" },
+  { en: "Bean Dip",                lvl: 54,  fn: "Sauce Maker" },
+  { en: "Olive Oil",               lvl: 60,  fn: "Sauce Maker" },
+  { en: "Mayonnaise",              lvl: 62,  fn: "Sauce Maker" },
+  { en: "Olive Dip",               lvl: 62,  fn: "Sauce Maker" },
+  { en: "Lemon Curd",              lvl: 66,  fn: "Sauce Maker" },
+  { en: "Tomato Sauce",            lvl: 69,  fn: "Sauce Maker" },
+  { en: "Salsa",                   lvl: 77,  fn: "Sauce Maker" },
+  { en: "Hummus",                  lvl: 95,  fn: "Sauce Maker" },
+  { en: "Tart Dressing",           lvl: 100, fn: "Sauce Maker" },
+
+  // Sewing Machine
+  { en: "Cotton Shirt",            lvl: 19,  fn: "Sewing Machine" },
+  { en: "Wooly Pants",             lvl: 21,  fn: "Sewing Machine" },
+  { en: "Violet Dress",            lvl: 25,  fn: "Sewing Machine" },
+  { en: "Soothing Pad",            lvl: 45,  fn: "Sewing Machine" },
+  { en: "Pillow",                  lvl: 51,  fn: "Sewing Machine" },
+  { en: "Blanket",                 lvl: 59,  fn: "Sewing Machine" },
+
+  // Smelter
+  { en: "Silver Bar",              lvl: 24,  fn: "Smelter" },
+  { en: "Gold Bar",                lvl: 25,  fn: "Smelter" },
+  { en: "Platinum Bar",            lvl: 25,  fn: "Smelter" },
+  { en: "Coal Bar",                lvl: 33,  fn: "Smelter" },
+  { en: "Iron Bar",                lvl: 34,  fn: "Smelter" },
+
+  // Smoothie Mixer
+  { en: "Berry Smoothie",          lvl: 64,  fn: "Smoothie Mixer" },
+  { en: "Green Smoothie",          lvl: 66,  fn: "Smoothie Mixer" },
+  { en: "Yogurt Smoothie",         lvl: 70,  fn: "Smoothie Mixer" },
+  { en: "Cucumber Smoothie",       lvl: 70,  fn: "Smoothie Mixer" },
+  { en: "Mixed Smoothie",          lvl: 88,  fn: "Smoothie Mixer" },
+  { en: "Sesame Smoothie",         lvl: 93,  fn: "Smoothie Mixer" },
+  { en: "Cocoa Smoothie",          lvl: 100, fn: "Smoothie Mixer" },
+  { en: "Plum Smoothie",           lvl: 102, fn: "Smoothie Mixer" },
+  { en: "Tropical Smoothie",       lvl: 104, fn: "Smoothie Mixer" },
+
+  // Soup Kitchen
+  { en: "Lobster Soup",            lvl: 46,  fn: "Soup Kitchen" },
+  { en: "Tomato Soup",             lvl: 47,  fn: "Soup Kitchen" },
+  { en: "Lamb Soup",               lvl: 46,  fn: "Soup Kitchen" },
+  { en: "Pumpkin Soup",            lvl: 49,  fn: "Soup Kitchen" },
+  { en: "Asparagus Soup",          lvl: 51,  fn: "Soup Kitchen" },
+  { en: "Fish Soup",               lvl: 53,  fn: "Soup Kitchen" },
+  { en: "Cabbage Soup",            lvl: 65,  fn: "Soup Kitchen" },
+  { en: "Onion Soup",              lvl: 72,  fn: "Soup Kitchen" },
+  { en: "Noodle Soup",             lvl: 73,  fn: "Soup Kitchen" },
+  { en: "Potato Soup",             lvl: 78,  fn: "Soup Kitchen" },
+  { en: "Bell Pepper Soup",        lvl: 81,  fn: "Soup Kitchen" },
+  { en: "Broccoli Soup",           lvl: 87,  fn: "Soup Kitchen" },
+  { en: "Mushroom Soup",           lvl: 104, fn: "Soup Kitchen" },
+
+  // Squirrel Tree
+  { en: "Peanuts",                 lvl: 62,  fn: "Squirrel Tree" },
+
+  // Stew Pot
+  { en: "Chickpea Stew",           lvl: 106, fn: "Stew Pot" },
+  { en: "Chili Stew",              lvl: 109, fn: "Stew Pot" },
+  { en: "Winter Stew",             lvl: 112, fn: "Stew Pot" },
+
+  // Sugar Mill
+  { en: "Brown Sugar",             lvl: 7,   fn: "Sugar Mill" },
+  { en: "White Sugar",             lvl: 13,  fn: "Sugar Mill" },
+  { en: "Syrup",                   lvl: 18,  fn: "Sugar Mill" },
+
+  // Sushi Bar
+  { en: "Sushi Roll",              lvl: 56,  fn: "Sushi Bar" },
+  { en: "Lobster Sushi",           lvl: 59,  fn: "Sushi Bar" },
+  { en: "Egg Roll",                lvl: 63,  fn: "Sushi Bar" },
+  { en: "Big Sushi Roll",          lvl: 76,  fn: "Sushi Bar" },
+  { en: "Rice Ball",               lvl: 110, fn: "Sushi Bar" },
+
+  // Taco Kitchen
+  { en: "Taco",                    lvl: 77,  fn: "Taco Kitchen" },
+  { en: "Spicy Bean Taco",         lvl: 77,  fn: "Taco Kitchen" },
+  { en: "Fish Taco",               lvl: 79,  fn: "Taco Kitchen" },
+  { en: "Quesadilla",              lvl: 82,  fn: "Taco Kitchen" },
+  { en: "Nachos",                  lvl: 87,  fn: "Taco Kitchen" },
+
+  // Tea Stand
+  { en: "Green Tea",               lvl: 80,  fn: "Tea Stand" },
+  { en: "Milk Tea",                lvl: 81,  fn: "Tea Stand" },
+  { en: "Honey Tea",               lvl: 83,  fn: "Tea Stand" },
+  { en: "Apple Ginger Tea",        lvl: 88,  fn: "Tea Stand" },
+  { en: "Lemon Tea",               lvl: 86,  fn: "Tea Stand" },
+  { en: "Orange Tea",              lvl: 89,  fn: "Tea Stand" },
+  { en: "Ice Tea",                 lvl: 92,  fn: "Tea Stand" },
+  { en: "Mint Tea",                lvl: 97,  fn: "Tea Stand" },
+  { en: "Chamomile Tea",           lvl: 100, fn: "Tea Stand" },
+  { en: "Pomegranate Tea",         lvl: 107, fn: "Tea Stand" },
+
+  // Waffle Maker
+  { en: "Plain Waffles",           lvl: 114, fn: "Waffle Maker" },
+  { en: "Berry Waffles",           lvl: 114, fn: "Waffle Maker" },
+  { en: "Chocolate Waffles",       lvl: 117, fn: "Waffle Maker" },
+  { en: "Blueberry Waffles",       lvl: 118, fn: "Waffle Maker" },
+  { en: "Breakfast Waffles",       lvl: 119, fn: "Waffle Maker" },
+
+  // Wok Kitchen
+  { en: "Fried Rice",              lvl: 69,  fn: "Wok Kitchen" },
+  { en: "Lamb Stir Fry",           lvl: 69,  fn: "Wok Kitchen" },
+  { en: "Spicy Fish",              lvl: 79,  fn: "Wok Kitchen" },
+  { en: "Peanut Noodles",          lvl: 86,  fn: "Wok Kitchen" },
+  { en: "Tofu Stir Fry",           lvl: 89,  fn: "Wok Kitchen" },
+
+  // Yogurt Maker
+  { en: "Plain Yogurt",            lvl: 103, fn: "Yogurt Maker" },
+  { en: "Strawberry Yogurt",       lvl: 105, fn: "Yogurt Maker" },
+  { en: "Tropical Yogurt",         lvl: 109, fn: "Yogurt Maker" },
+  { en: "Breakfast Bowl",          lvl: 119, fn: "Yogurt Maker" },
+];
+
+/* ====================================
+   ELEMENTS, STATE & TIMERS
+   ==================================== */
+const foodsGrid = document.getElementById("foodsGrid");
+const selectedList = document.getElementById("selectedList");
+const searchInput = document.getElementById("searchInput");
+const machineFilter = document.getElementById("machineFilter");
+const sortFilter = document.getElementById("sortFilter");
+const selectedCount = document.getElementById("selectedCount");
+
+let selectedFoods = {};
+let selectedOpen = true;
+let searchTimeout = null;
+
+/* =========================================================
+   RENDER FOODS GRID (DocumentFragment)
+   ========================================================= */
+function renderFoods(data){
+  foodsGrid.innerHTML = "";
+
+  if(data.length === 0){
+    foodsGrid.innerHTML = `<div class="empty">Tidak ada makanan ditemukan 😢</div>`;
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  data.forEach(food => {
+    const qty = selectedFoods[food.en] || 0;
+    const safeId = food.en.replaceAll(' ', '_').replaceAll("'", "");
+
+    const card = document.createElement("div");
+    card.className = "food-card";
+    card.innerHTML = `
+      <div class="food-top">
+        <div class="emoji">
+          <img src="foods/${food.en.replaceAll(' ','_')}.png"
+               onerror="this.src='https://cdn-icons-png.flaticon.com/512/1046/1046784.png'"
+               alt="${food.en}">
+        </div>
+        <div class="food-info">
+          <h3>${food.en}</h3>
+          <div class="machine">${food.fn}</div>
+        </div>
+      </div>
+      <div class="food-bottom">
+        <div class="level">Level <span>${food.lvl}</span></div>
+        <div class="counter">
+          <button onclick="changeQty('${food.en.replaceAll("'", "\\'")}', -1)">-</button>
+          <span id="qty-${safeId}">${qty}</span>
+          <button onclick="changeQty('${food.en.replaceAll("'", "\\'")}', 10)">+</button>
+        </div>
+      </div>
+    `;
+    fragment.appendChild(card);
+  });
+
+  foodsGrid.appendChild(fragment);
+}
+
+/* =========================
+   CHANGE QTY
+========================= */
+function changeQty(name, amount){
+  if(!selectedFoods[name]){
+    selectedFoods[name] = 0;
+  }
+
+  selectedFoods[name] += amount;
+  let currentQty = selectedFoods[name];
+
+  if(selectedFoods[name] <= 0){
+    delete selectedFoods[name];
+    currentQty = 0;
+  }
+
+  const safeId = name.replaceAll(' ', '_').replaceAll("'", "");
+  const qtySpan = document.getElementById(`qty-${safeId}`);
+  if(qtySpan) {
+    qtySpan.textContent = currentQty;
+  }
+
+  renderSelected();
+}
+
+/* =========================
+   RENDER SELECTED LIST
+========================= */
+function renderSelected(){
+  selectedList.innerHTML = "";
+  const entries = Object.entries(selectedFoods);
+  let total = 0;
+
+  if(entries.length === 0){
+    selectedList.innerHTML = `<div class="empty-selected">Belum ada item dipilih</div>`;
+    selectedCount.textContent = 0;
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  entries.forEach(([name, qty]) => {
+    total += qty;
+    const item = document.createElement("div");
+    item.className = "selected-item";
+    item.innerHTML = `
+      <span>${name}</span>
+      <strong>x${qty}</strong>
+    `;
+    fragment.appendChild(item);
+  });
+
+  selectedList.appendChild(fragment);
+  selectedCount.textContent = total;
+}
+
+/* ===============================================
+   FILTER & SORT
+   =============================================== */
+function filterFoods(){
+  let filtered = [...foodsData];
+
+  const search = searchInput.value.toLowerCase().trim();
+  const machine = machineFilter.value;
+  const sort = sortFilter.value;
+
+  if(search !== "") {
+    filtered = filtered.filter(food =>
+      food.en.toLowerCase().includes(search) ||
+      food.fn.toLowerCase().includes(search)
+    );
+  }
+
+  if(machine !== "all" && machine !== ""){
+    filtered = filtered.filter(food => food.fn === machine);
+  }
+
+  if(sort === "low"){
+    filtered.sort((a, b) => a.lvl - b.lvl);
+  } else if(sort === "high"){
+    filtered.sort((a, b) => b.lvl - a.lvl);
+  } else if(sort === "az"){
+    filtered.sort((a, b) => a.en.localeCompare(b.en));
+  }
+
+  renderFoods(filtered);
+}
+
+/* =========================================================
+   DEBOUNCE INPUT
+   ========================================================= */
+function debounceSearch() {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    filterFoods();
+  }, 150);
+}
+
+/* =========================
+   UTILS / COPY / RESET
+========================= */
+function copySelected(){
+  const entries = Object.entries(selectedFoods);
+
+  if(entries.length === 0){
+    alert("Belum ada item dipilih");
+    return;
+  }
+
+  let text = "📋 LIST HAY DAY\n\n";
+  entries.forEach(([name, qty]) => {
+    text += `${name} x${qty}\n`;
+  });
+
+  navigator.clipboard.writeText(text);
+  alert("List berhasil disalin!");
+}
+
+function resetAll() {
+  selectedFoods = {};
+  searchInput.value = "";
+  machineFilter.value = "all";
+  sortFilter.value = "default";
+
+  renderSelected();
+  filterFoods(); 
+}
+
+function populateMachines(){
+  const machines = [...new Set(foodsData.map(item => item.fn))];
+  machines.sort();
+
+  // Reset isi dropdown filter dan sisakan default "Semua Mesin"
+  machineFilter.innerHTML = `<option value="all">Semua Mesin</option>`;
+
+  const fragment = document.createDocumentFragment();
+  machines.forEach(machine => {
+    const opt = document.createElement("option");
+    opt.value = machine;
+    opt.textContent = machine;
+    fragment.appendChild(opt);
+  });
+  machineFilter.appendChild(fragment);
+}
+
+function updateStats(){
+  document.getElementById("totalFoods").textContent = foodsData.length;
+  document.getElementById("totalMachines").textContent = [...new Set(foodsData.map(item=>item.fn))].length;
+  document.getElementById("highestLevel").textContent = Math.max(...foodsData.map(item=>item.lvl));
+}
+
+function toggleSelectedBox(){
+  const content = document.getElementById("selectedContent");
+  const icon = document.getElementById("toggleIcon");
+
+  selectedOpen = !selectedOpen;
+
+  if(selectedOpen){
+    content.classList.remove("closed");
+    icon.innerHTML = "▼";
+  } else {
+    content.classList.add("closed");
+    icon.innerHTML = "▶";
+  }
+}
+
+/* =========================
+   LISTENERS & INIT
+========================= */
+searchInput.addEventListener("input", debounceSearch);
+machineFilter.addEventListener("change", filterFoods);
+sortFilter.addEventListener("change", filterFoods);
+
+populateMachines();
+updateStats();
+renderFoods(foodsData);
+renderSelected();
+</script>
+
+</body>
+</html>
