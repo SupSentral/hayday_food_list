@@ -419,7 +419,7 @@
   <div class="stats">
     <div class="stat-card">
       <h2 id="totalFoods">0</h2>
-      <p>Total Item</p>
+      <p>Total Food</p>
     </div>
     <div class="stat-card">
       <h2 id="totalMachines">0</h2>
@@ -445,7 +445,7 @@
     </div>
     <div class="selected-content closed" id="selectedContent">
       <div class="selected-list" id="selectedList">
-        <div class="empty-selected">Belum ada item dipilih</div>
+        <div class="empty-selected">Belum ada FOOD dipilih</div>
       </div>
     </div>
   </div>
@@ -991,7 +991,7 @@ function renderSelected(){
   const entries = Object.entries(selectedFoods);
 
   if(entries.length === 0){
-    selectedList.innerHTML = `<div class="empty-selected">Belum ada item dipilih</div>`;
+    selectedList.innerHTML = `<div class="empty-selected">Belum ada FOOD dipilih</div>`;
     selectedCount.textContent = 0;
     return;
   }
@@ -1032,7 +1032,7 @@ function renderSelected(){
     color: #4a3728;
   ">
     <div style="font-weight:700; color:#e06c00; margin-bottom:8px;">
-      📊 Total: <span>${totalItems} item dipilih</span>
+      📊 Total: <span>${totalItems} Food dipilih</span>
     </div>
     <div style="display:flex; flex-wrap:wrap; gap:6px;">
   `;
@@ -1096,7 +1096,7 @@ function copySelected(){
   const entries = Object.entries(selectedFoods);
 
   if(entries.length === 0){
-    alert("Belum ada item dipilih");
+    alert("Belum ada Food dipilih");
     return;
   }
 
@@ -1104,7 +1104,7 @@ function copySelected(){
   entries.forEach(([name, qty]) => {
     text += `${name} x${qty}\n`;
   });
-  text += `\nTotal: ${entries.reduce((sum, [_, qty]) => sum + qty, 0)} item`;
+  text += `\nTotal: ${entries.reduce((sum, [_, qty]) => sum + qty, 0)} Food`;
 
   navigator.clipboard.writeText(text);
   alert("List berhasil disalin!");
